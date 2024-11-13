@@ -1,21 +1,22 @@
 {
   "name": "ionic-datepicker",
   "version": "1.2.1",
-  "description": "A date picker for ionic framework",
+  "description": "A date picker for Ionic framework",
   "main": "./dist/ionic-datepicker.bundle.min.js",
   "author": "https://github.com/rajeshwarpatlolla, rajeshwar.patlolla@gmail.com",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "del": "*",
-    "gulp": "*",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-concat": "*",
-    "gulp-css2js": "*",
-    "gulp-minify-html": "*",
-    "gulp-ng-html2js": "*",
-    "gulp-sass": "^2.3.2",
-    "gulp-uglify": "*"
+    "del": "^8.0.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-css2js": "^0.0.5",
+    "gulp-minify-html": "^1.0.0",
+    "gulp-ng-html2js": "^0.1.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-uglify": "^3.0.2",
+    "sass": "^1.49.0"
   },
   "scripts": {
     "build": "gulp build"
