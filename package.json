@@ -17,5 +17,8 @@
     "gulp-ng-html2js": "*",
     "gulp-sass": "^2.3.2",
     "gulp-uglify": "*"
+  },
+  "scripts": {
+    "build": "gulp build"
   }
 }
