@@ -8,16 +8,19 @@
   },
   "author": "https://github.com/rajeshwarpatlolla, rajeshwar.patlolla@gmail.com",
   "license": "MIT",
-  "dependencies": {},
+  "type": "module",
+  "dependencies": {
+    "sass": "^1.80.7"
+  },
   "devDependencies": {
     "del": "*",
     "gulp": "*",
-    "gulp-autoprefixer": "^3.1.1",
+    "gulp-autoprefixer": "*",
     "gulp-concat": "*",
     "gulp-css2js": "*",
     "gulp-minify-html": "*",
     "gulp-ng-html2js": "*",
-    "gulp-sass": "^2.3.2",
+    "gulp-sass": "5.1.0",
     "gulp-uglify": "*"
   }
 }
