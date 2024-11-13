@@ -24,13 +24,13 @@ jobs:
       - name: Install dependencies
         run: |
           npm install  # This will install the dependencies listed in package.json
-          
-      # Step 4: Run the Gulp build task
+
+      # Step 4: Run Gulp build task
       - name: Run Gulp build task
         run: |
           npx gulp build  # This will run the Gulp build task defined in gulpfile.js
 
-      # Step 5: Commit and push the minified files back to the repository
+      # Step 5: Commit and push minified files
       - name: Commit and push minified files
         run: |
           git config --global user.name 'github-actions[bot]'
