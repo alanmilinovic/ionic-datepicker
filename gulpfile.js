@@ -3,7 +3,6 @@ import { deleteAsync as del } from 'del'; // Correct import for del in ESM
 import fs from 'fs';
 import sass from 'gulp-sass';
 import autoprefixer from 'gulp-autoprefixer';
-import del from 'del';
 import concat from 'gulp-concat';
 import uglify from 'gulp-uglify';
 import ngHtml2Js from 'gulp-ng-html2js';
