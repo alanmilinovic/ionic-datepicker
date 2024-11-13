@@ -1,20 +1,25 @@
-var gulp = require('gulp');
-var del = require('del');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var ngHtml2Js = require("gulp-ng-html2js");
-var minifyHtml = require("gulp-minify-html");
-var css2js = require("gulp-css2js");
-var sass = require("gulp-sass");
-var autoprefixer = require('gulp-autoprefixer');
+import gulp from 'gulp';
+import { deleteAsync as del } from 'del'; // Correct ES module import for del
+import concat from 'gulp-concat';
+import uglify from 'gulp-uglify';
+import ngHtml2Js from 'gulp-ng-html2js';
+import minifyHtml from 'gulp-minify-html';
+import css2js from 'gulp-css2js';
+import gulpSass from 'gulp-sass'; // Import gulp-sass
+import sassCompiler from 'sass'; // Import the sass compiler (Dart Sass)
+import autoprefixer from 'gulp-autoprefixer'; // Import autoprefixer
 
-var sassOptions = {
-    indentWidth: 4,
-    outputStyle: 'expanded',
-    errorLogToConsole: true
+const sass = gulpSass(sassCompiler);  // Initialize gulp-sass with the sass compiler
+
+// Define Sass options
+const sassOptions = {
+  indentWidth: 4,
+  outputStyle: 'expanded',
+  errorLogToConsole: true,
 };
 
-var autoprefixerOptions = {
+// Define Autoprefixer options
+const autoprefixerOptions = {
   browsers: [
     '> 1%',
     'last 2 versions',
@@ -23,45 +28,49 @@ var autoprefixerOptions = {
     'safari 8',
     'IE 9',
     'IE 10',
-    'IE 11'
-  ]
+    'IE 11',
+  ],
 };
 
+// HTML to JS task
 gulp.task('html2js', function () {
   return gulp.src(['./src/*.html'])
     .pipe(minifyHtml())
     .pipe(ngHtml2Js({
-      moduleName: "ionic-datepicker.templates"
+      moduleName: 'ionic-datepicker.templates',
     }))
-    .pipe(concat("templates.js"))
-    //.pipe(uglify())
-    .pipe(gulp.dest("./dist"));
+    .pipe(concat('templates.js'))
+    .pipe(gulp.dest('./dist'));
 });
 
+// CSS to JS task
 gulp.task('css2js', function () {
-  return gulp.src("./src/**/ionic-datepicker.styles.scss")
-    .pipe(concat("ionic-datepicker.styles.css"))
-    .pipe(sass(sassOptions).on('error', sass.logError))
-    .pipe(autoprefixer(autoprefixerOptions))
+  return gulp.src('./src/**/ionic-datepicker.styles.scss')
+    .pipe(concat('ionic-datepicker.styles.css'))
+    .pipe(sass(sassOptions).on('error', sass.logError))  // Use the sass compiler here
+    .pipe(autoprefixer(autoprefixerOptions))  // Apply autoprefixer here
     .pipe(css2js())
-    .pipe(uglify())
-    .pipe(gulp.dest("./dist/"));
-});
-
-gulp.task('make-bundle', ['del', 'html2js', 'css2js'], function () {
-  return gulp.src(['./dist/*', './src/*.js'])
-    .pipe(concat('ionic-datepicker.bundle.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('del-temp-files', ['make-bundle'], function () {
-  del(['./dist/templates.js', './dist/ionic-datepicker.styles.js']);
-});
-
+// Delete dist files task
 gulp.task('del', function () {
-  del(['./dist/*']);
+  return del(['./dist/*']);
 });
 
-gulp.task('build', ['del-temp-files']);
+// Make bundle task
+gulp.task('make-bundle', gulp.series('del', 'html2js', 'css2js', function () {
+  return gulp.src(['./dist/*', './src/*.js'])
+    .pipe(concat('ionic-datepicker.bundle.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('./dist/'));
+}));
 
+// Delete temporary files task
+gulp.task('del-temp-files', gulp.series('make-bundle', function () {
+  return del(['./dist/templates.js', './dist/ionic-datepicker.styles.js']);
+}));
+
+// Build task
+gulp.task('build', gulp.series('del-temp-files'));
