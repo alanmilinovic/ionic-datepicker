@@ -10,14 +10,14 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "del": "*",
-    "gulp": "*",
+    "del": "^8.0.0",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^3.1.1",
-    "gulp-concat": "*",
-    "gulp-css2js": "*",
-    "gulp-minify-html": "*",
-    "gulp-ng-html2js": "*",
+    "gulp-concat": "^2.6.1",
+    "gulp-css2js": "^0.0.5",
+    "gulp-minify-html": "^1.0.0",
+    "gulp-ng-html2js": "^0.0.11",
     "gulp-sass": "^2.3.2",
-    "gulp-uglify": "*"
+    "gulp-uglify": "^3.0.2"
   }
 }
