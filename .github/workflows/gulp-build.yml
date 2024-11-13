@@ -3,31 +3,23 @@ name: Build Ionic Datepicker
 on:
   push:
     branches:
-      - master  # Trigger the build on push to the master branch
+      - master
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Run the job on the latest Ubuntu environment
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout the repository
-      uses: actions/checkout@v2  # Checkout the code from the repository
+      uses: actions/checkout@v2
 
     - name: Set up Node.js
-      uses: actions/setup-node@v3  # Use the setup-node action to install Node.js
+      uses: actions/setup-node@v3
       with:
-        node-version: '14'
+        node-version: '16'  # Use Node.js 16 (or 14)
 
     - name: Install dependencies
-      run: npm install  # Run npm install to install all dependencies from package.json
+      run: npm install
 
     - name: Run Gulp build
-      run: npm run build  # Run the build command using Gulp
-
-    - name: Commit built files (if necessary)
-      run: |
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git config --global user.name "github-actions[bot]"
-        git add dist/  # Assuming the dist folder contains your build output
-        git commit -m "Automated build output"
-        git push  # Push the changes if you need to update your repository with the new build output
+      run: npm run build
