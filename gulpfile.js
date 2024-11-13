@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import del from 'del'; // Default import for del
+import { deleteAsync as del } from 'del'; // Correct import for del in ESM
 import concat from 'gulp-concat';
 import uglify from 'gulp-uglify';
 import ngHtml2Js from 'gulp-ng-html2js';
