@@ -1,0 +1,44 @@
+name: Gulp Build and Minify
+
+on:
+  push:
+    branches:
+      - master  # Trigger this workflow on push to the master branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # This will run the job on the latest Ubuntu environment
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # You can specify a different version of Node.js if needed
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          npm install  # This will install the dependencies listed in package.json
+          
+      # Step 4: Run the Gulp build task
+      - name: Run Gulp build task
+        run: |
+          npx gulp build  # This will run the Gulp build task defined in gulpfile.js
+
+      # Step 5: Commit and push the minified files back to the repository
+      - name: Commit and push minified files
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Stage only the necessary files (minified JS and CSS)
+          git add dist/ionic-datepicker.bundle.min.js dist/ionic-datepicker.styles.css
+
+          # Commit and push the changes
+          git commit -m 'Automated build: Update minified files'
+          git push origin master
