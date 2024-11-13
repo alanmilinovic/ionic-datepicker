@@ -3,7 +3,7 @@ name: Build Ionic Datepicker
 on:
   push:
     branches:
-      - master  # Adjust to the branch where you want the workflow to run
+      - master
 
 jobs:
   build:
@@ -16,13 +16,13 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16'  # Adjust the version if necessary
+        node-version: '18'  # Use Node 18 or higher
 
     - name: Install dependencies
       run: npm install
 
     - name: Run Gulp build
-      run: npm run build  # This will run the build script you have defined in package.json
+      run: npm run build  # Runs the build script from package.json
 
     - name: Commit built files
       run: |
