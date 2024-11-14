@@ -18,8 +18,14 @@ jobs:
       with:
         node-version: '20.18.0'
 
+    - name: Ensure write permissions for dist
+      run: chmod -R 777 ./dist
+  
     - name: Install dependencies
       run: npm install
 
     - name: Run Gulp build
       run: npm run build
+
+    - name: Check `dist` directory after build
+      run: ls -la ./dist
