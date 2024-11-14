@@ -18,8 +18,11 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Ensure write permissions
+        run: chmod -R 777 ./dist
+
       - name: Clean up dist folder
-        run: rm -rf ./dist && mkdir ./dist
+        run: rm -rf ./dist && mkdir -p ./dist
   
       - name: Install dependencies
         run: npm install
@@ -30,6 +33,12 @@ jobs:
       - name: Upload dist directory as artifact
         if: always()
         uses: actions/upload-artifact@v3
+        with:
+          name: dist-folder
+          path: ./dist
+
+      - name: Download dist-folder artifact to dist
+        uses: actions/download-artifact@v3
         with:
           name: dist-folder
           path: ./dist
