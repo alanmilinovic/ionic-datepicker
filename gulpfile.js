@@ -52,10 +52,12 @@ gulp.task('del', function () {
 
 // Make bundle task
 gulp.task('make-bundle', gulp.series('del', 'html2js', 'css2js', function () {
+  console.log('Starting make-bundle task');
   return gulp.src(['./dist/*', './src/*.js'])
     .pipe(concat('ionic-datepicker.bundle.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('./dist/'));
+    .pipe(uglify().on('error', (e) => console.error('Uglify error:', e))) // Catch uglify errors
+    .pipe(gulp.dest('./dist/'))
+    .on('end', () => console.log('make-bundle task completed and bundle file created.'));
 }));
 
 // Delete temporary files task
