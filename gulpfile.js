@@ -34,42 +34,42 @@ const autoprefixerOptions = {
 
 // HTML to JS task
 gulp.task('html2js', function () {
-  return gulp.src(['./src/*.html'])
+  return gulp.src(['src/*.html'])
     .pipe(minifyHtml())
     .pipe(ngHtml2Js({
       moduleName: 'ionic-datepicker.templates',
     }))
     .pipe(concat('templates.js'))
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('dist'));
 });
 
 // CSS to JS task
 gulp.task('css2js', function () {
-  return gulp.src('./src/**/ionic-datepicker.styles.scss')
+  return gulp.src('src/**/ionic-datepicker.styles.scss')
     .pipe(concat('ionic-datepicker.styles.css'))
     .pipe(sass(sassOptions).on('error', sass.logError))  // Use the sass compiler here
     .pipe(autoprefixer(autoprefixerOptions))  // Apply autoprefixer here
     .pipe(css2js())
     .pipe(uglify())
-    .pipe(gulp.dest('./dist/'));
+    .pipe(gulp.dest('dist'));
 });
 
 // Delete dist files task
 gulp.task('del', function () {
-  return del(['./dist/*']);
+  return del(['dist/*']);
 });
 
 // Make bundle task
 gulp.task('make-bundle', gulp.series('del', 'html2js', 'css2js', function () {
-  return gulp.src(['./dist/*', './src/*.js'])
+  return gulp.src(['dist/*', 'src/*.js'])
     .pipe(concat('ionic-datepicker.bundle.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('./dist/'));
+    .pipe(gulp.dest('dist/'));
 }));
 
 // Delete temporary files task
 gulp.task('del-temp-files', gulp.series('make-bundle', function () {
-  return del(['./dist/templates.js', './dist/ionic-datepicker.styles.js']);
+  return del(['dist/templates.js', 'dist/ionic-datepicker.styles.js']);
 }));
 
 // Build task
