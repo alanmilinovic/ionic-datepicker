@@ -1,25 +1,41 @@
-name: Build Ionic Datepicker
+name: Build and Test
 
 on:
   push:
     branches:
-      - master
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout the repository
-      uses: actions/checkout@v2
+      - name: Check out the repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
-  
-    - name: Install dependencies
-      run: npm install
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
 
-    - name: Run Gulp build
-      run: npm run build
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Ensure write permissions on dist folder
+        run: chmod -R 777 ./dist
+
+      - name: Run Gulp Build
+        run: npm run build
+
+      - name: Check `dist` directory contents
+        run: ls -la ./dist
+
+      - name: Upload dist directory as artifact
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-folder
+          path: ./dist
