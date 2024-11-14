@@ -4,5 +4,3 @@ bower_components/
 .DS_Store/
 /.vs
 /package-lock.json
-/.gitignore
-/.gitignore
