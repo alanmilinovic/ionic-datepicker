@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    branches:
-      - master
 
 jobs:
   build:
@@ -21,17 +18,14 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Clean up dist folder
+        run: rm -rf ./dist && mkdir ./dist
+  
       - name: Install dependencies
         run: npm install
 
-      - name: Ensure write permissions on dist folder
-        run: chmod -R 777 ./dist
-
       - name: Run Gulp Build
         run: npm run build
-
-      - name: Check `dist` directory contents
-        run: ls -la ./dist
 
       - name: Upload dist directory as artifact
         if: always()
