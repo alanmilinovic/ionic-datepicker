@@ -13,14 +13,14 @@
     "sass": "^1.80.7"
   },
   "devDependencies": {
-    "del": "*",
-    "gulp": "*",
-    "gulp-autoprefixer": "*",
-    "gulp-concat": "*",
-    "gulp-css2js": "*",
-    "gulp-minify-html": "*",
-    "gulp-ng-html2js": "*",
+    "del": "8.0.0",
+    "gulp": "5.0.0",
+    "gulp-autoprefixer": "9.0.0",
+    "gulp-concat": "2.6.1",
+    "gulp-css2js": "1.2.1",
+    "gulp-minify-html": "1.0.6",
+    "gulp-ng-html2js": "0.2.3",
     "gulp-sass": "5.1.0",
-    "gulp-uglify": "*"
+    "gulp-uglify": "3.0.2"
   }
 }
