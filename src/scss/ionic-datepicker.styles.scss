@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
-@import
+@use
   // Variables
-"scss/variables";
+'scss/variables' as *;
 
 /**/
 .padding_zero {

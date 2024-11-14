@@ -22,5 +22,15 @@
     "gulp-ng-html2js": "0.2.3",
     "gulp-sass": "5.1.0",
     "gulp-uglify": "3.0.2"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "firefox >= 4",
+    "safari 7",
+    "safari 8",
+    "IE 9",
+    "IE 10",
+    "IE 11"
+  ]
 }
