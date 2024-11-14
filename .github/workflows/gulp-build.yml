@@ -35,7 +35,7 @@ jobs:
 
       - name: Upload dist directory as artifact
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: dist-folder
           path: ./dist
