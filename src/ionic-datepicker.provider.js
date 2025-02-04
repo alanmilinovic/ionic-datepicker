@@ -21,7 +21,7 @@ angular.module('ionic-datepicker.provider', [])
       angular.extend(config, inputObj);
     };
 
-    this.$get = ['$rootScope', '$ionicPopup', '$ionicModal', 'IonicDatepickerService', function ($rootScope, $ionicPopup, $ionicModal, IonicDatepickerService) {
+    this.$get = ['$rootScope', '$ionicPopup', '$ionicModal', 'IonicDatepickerService', 'IonicClosePopupService', function ($rootScope, $ionicPopup, $ionicModal, IonicDatepickerService, IonicClosePopupService) {
 
       var provider = {};
 
@@ -286,6 +286,9 @@ angular.module('ionic-datepicker.provider', [])
             cssClass: 'ionic_datepicker_popup',
             buttons: buttons
           });
+
+          IonicClosePopupService.register($scope.popup);
+          
           return closePopup;
         }
         openModal();
